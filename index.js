@@ -12,43 +12,53 @@ const punchInEl = document.querySelector("#punchIn");
 const punchOutEl = document.querySelector("#punchOut");
 const clearDayEl = document.querySelector("#clearDay");
 
+let lastUpdate = Date.now();
+let accumulatedTime = timer;
+
 // Function to update the timer display
 function updateTimer() {
+	let now = Date.now();
 	if (isClockedIn && clockIn) {
-		// Calculate real elapsed time
-		let now = Date.now();
-		let elapsedTime = Math.floor((now - clockIn) / 1000);
-		timer = elapsedTime;
-		localStorage.setItem("timer", timer);
-	}
-
-	// Show/hide clear button
-	if (timer > 0) {
-		clearDayEl.classList.remove("hid");
-	} else {
-		clearDayEl.classList.add("hid");
+		accumulatedTime = timer + Math.floor((now - clockIn) / 1000);
 	}
 
 	// Convert elapsed time to HH:MM:SS
 	let formattedTime = moment
 		.utc()
 		.startOf("day")
-		.add(timer, "seconds")
+		.add(accumulatedTime, "seconds")
 		.format("HH:mm:ss");
 
 	timerEl.innerHTML = formattedTime;
 }
 
+function animate() {
+	let now = Date.now();
+	if (now - lastUpdate >= 1000) {
+		updateTimer();
+		lastUpdate = now;
+	}
+	requestAnimationFrame(animate);
+}
+
 // Function to toggle clock-in state
 function toggle() {
-	isClockedIn = !isClockedIn;
 	if (isClockedIn) {
+		// If clocking out, store the accumulated time
+		if (clockIn) {
+			let now = Date.now();
+			timer += Math.floor((now - clockIn) / 1000);
+			clockIn = null;
+			localStorage.setItem("timer", timer);
+		}
+		localStorage.removeItem("clockIn");
+	} else {
+		// If clocking in, set a new timestamp
 		clockIn = Date.now();
 		localStorage.setItem("clockIn", clockIn);
-	} else {
-		localStorage.removeItem("clockIn"); // Stop tracking
 	}
 
+	isClockedIn = !isClockedIn;
 	localStorage.setItem("isClockedIn", isClockedIn);
 	punchInEl.classList.toggle("hid");
 	punchOutEl.classList.toggle("hid");
@@ -82,6 +92,6 @@ if (isClockedIn) {
 	punchOutEl.classList.add("hid");
 }
 
-// Start the timer loop
-setInterval(updateTimer, 1000);
+// Start the animation loop
+requestAnimationFrame(animate);
 updateTimer();

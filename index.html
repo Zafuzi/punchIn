@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple punch-in/punch-out timer to track your work hours seamlessly.">
+    <meta property="og:title" content="Punch In Without Mike Tyson">
+    <meta property="og:description" content="Track your work time effortlessly with this simple timer app.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zafuzi.github.io/punchIn">
     <title>Punch In Without Mike Tyson</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <main class="main">
-	<p id="timer">00:00:00</p>
-	<button class="positive" id="punchIn">Punch In</button>
-	<button id="punchOut" class="hid">Punch Out</button>
-	<button class="assertive hid" id="clearDay">Clear Day</button>
-</main>
+        <h1 aria-label="Work Time Tracker">Time Tracker</h1>
+        <p id="timer" aria-live="polite">00:00:00</p>
+        <button class="positive" id="punchIn" aria-label="Start tracking time">Punch In</button>
+        <button class="positive-ghost hid" id="punchOut" aria-label="Stop tracking time">Punch Out</button>
+        <button class="assertive-ghost" id="clearDay" aria-label="Reset the timer for a new workday">Clear Day</button>
+    </main>
 
-<script type="module" src="index.js"></script>
+    <script type="module" src="index.js"></script>
 </body>
 </html>

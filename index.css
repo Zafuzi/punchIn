@@ -1,41 +1,87 @@
-.main {
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body, html {
+	width: 100vw;
+	height: 100vh;
+	background-color: #1b1a1c;
 	display: flex;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
 	justify-content: center;
 	align-items: center;
-	flex-flow: column;
-
-	padding: 16px;
-	gap: 8px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #ddd;
 }
 
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	padding: 24px;
+	text-align: center;
+}
+
+/* Timer Styling */
+#timer {
+	font-size: 72px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 20px 40px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Styling */
 button {
 	padding: 16px 24px;
-	font-size: larger;
+	font-size: 18px;
 	font-weight: bold;
 	min-width: 200px;
-	border-radius: 5px;
+	border-radius: 8px;
 	cursor: pointer;
-}
-
-#timer {
-	font-size: 74pt;
-	font-weight: bold;
-	font-family: monospace;
+	border: none;
+	transition: all 0.2s ease-in-out;
 }
 
 .positive {
 	background: #0074c7;
-	border: 2px solid #0074c7;
-	color: white;
+	color: #fff;
+	box-shadow: 0px 4px 8px rgba(0, 116, 199, 0.4);
 }
 
-.assertive {
-	background: #dd0033;
+.positive:hover {
+	background: #005ea6;
+}
+
+.positive:active {
+	transform: scale(0.95);
+}
+
+.positive-ghost {
+	background: transparent;
+	border: 2px solid #0074c7;
+	color: #0074c7;
+}
+
+.positive-ghost:hover {
+	background: #0074c7;
+	color: #fff;
+}
+
+.assertive-ghost {
+	background: transparent;
 	border: 2px solid #dd0033;
-	color: white;
+	color: #dd0033;
+}
+
+.assertive-ghost:hover {
+	background: #dd0033;
+	color: #fff;
 }
 
 .hid {
