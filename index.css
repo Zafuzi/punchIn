@@ -1,0 +1,43 @@
+.main {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+
+	padding: 16px;
+	gap: 8px;
+}
+
+button {
+	padding: 16px 24px;
+	font-size: larger;
+	font-weight: bold;
+	min-width: 200px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#timer {
+	font-size: 74pt;
+	font-weight: bold;
+	font-family: monospace;
+}
+
+.positive {
+	background: #0074c7;
+	border: 2px solid #0074c7;
+	color: white;
+}
+
+.assertive {
+	background: #dd0033;
+	border: 2px solid #dd0033;
+	color: white;
+}
+
+.hid {
+	display: none;
+}
